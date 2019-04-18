@@ -10,7 +10,7 @@
     <meta name="keywords" content="Linux,Command,命令大全,Linux命令手册,gdb,功能强大的程序调试器">
     <title>gdb 命令，Linux gdb 命令详解：功能强大的程序调试器 -  Linux 命令搜索引擎</title>
     <link rel="shortcut icon" href="../img/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="../css/index.css?v=1555577029550">
+    <link rel="stylesheet" type="text/css" href="../css/index.css?v=1555577280794">
 </head>
 <body>
 <a href="https://github.com/jaywcjlove/linux-command" target="_blank" class="github-corner"> <svg viewBox="0 0 250 250"><!-- kenny wang <wowohoo@qq.com> https://github.com/jaywcjlove --> <title>logo</title> <desc>Linux Command Logo. https://github.com/jaywcjlove</desc><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg> </a>
@@ -254,7 +254,7 @@ Breakpoint 1, main <span class="token punctuation">(</span><span class="token pu
 20 n++<span class="token punctuation">;</span></code></pre><p>上面的信息表示已经执行完“n = 1;”，并显示下一条要执行的代码为第20行的“n++;”。</p>
 <p>既然已经执行了“n = 1;”，即给变量 n 赋值为 1，那我们用“p”命令（Print）看一下变量 n 的值是不是 1 ：</p>
 <pre><code><span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> p n
-<span class="token variable">$1</span> <span class="token operator">=</span> 1</code></pre><p>果然是 1。（$1大致是表示这是第一次使用“p”命令——再次执行“p n”将显示“$2 = 1”——此信息应该没有什么用处。）</p>
+<span class="token variable">&#36;1</span> <span class="token operator">=</span> 1</code></pre><p>果然是 1。（$1大致是表示这是第一次使用“p”命令——再次执行“p n”将显示“$2 = 1”——此信息应该没有什么用处。）</p>
 <p>下面我们分别在第26行、tempFunction 函数开头各设置一个断点（分别使用命令“b 26”“b tempFunction”）：</p>
 <pre><code><span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> b 26
 Breakpoint 2 at 0x804837b: <span class="token function">file</span> gdb-sample.c, line 26.
@@ -266,7 +266,7 @@ Continuing.
 Breakpoint 2, main <span class="token punctuation">(</span><span class="token punctuation">)</span> at gdb-sample.c:26
 26 printf<span class="token punctuation">(</span><span class="token string">"n = %d, nGlobalVar = %d /n"</span>, n, nGlobalVar<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> p nGlobalVar
-<span class="token variable">$2</span> <span class="token operator">=</span> 88
+<span class="token variable">&#36;2</span> <span class="token operator">=</span> 88
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> c
 Continuing.
 n <span class="token operator">=</span> 1, nGlobalVar <span class="token operator">=</span> 88
@@ -274,9 +274,9 @@ n <span class="token operator">=</span> 1, nGlobalVar <span class="token operato
 Breakpoint 3, tempFunction <span class="token punctuation">(</span>a<span class="token operator">=</span>1, b<span class="token operator">=</span>2<span class="token punctuation">)</span> at gdb-sample.c:12
 12 printf<span class="token punctuation">(</span><span class="token string">"tempFunction is called, a = %d, b = %d /n"</span>, a, b<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> p a
-<span class="token variable">$3</span> <span class="token operator">=</span> 1
+<span class="token variable">&#36;3</span> <span class="token operator">=</span> 1
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> p b
-<span class="token variable">$4</span> <span class="token operator">=</span> 2</code></pre><p>上面反馈的信息一切都在我们预料之中~~</p>
+<span class="token variable">&#36;4</span> <span class="token operator">=</span> 2</code></pre><p>上面反馈的信息一切都在我们预料之中~~</p>
 <p>再一次执行“c”命令（Continue），因为后面再也没有其它断点，程序将一直执行到结束：</p>
 <pre><code><span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> c
 Continuing.
@@ -284,30 +284,30 @@ tempFunction is called, a <span class="token operator">=</span> 1, b <span class
 n <span class="token operator">=</span> 3
 Program exited normally.</code></pre><p>有时候需要看到编译器生成的汇编代码，以进行汇编级的调试或跟踪，又该如何操作呢？</p>
 <p>这就要用到display命令“display /i $pc”了（此命令前面已有详细解释）：</p>
-<pre><code><span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> display /i <span class="token variable">$pc</span>
+<pre><code><span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> display /i <span class="token variable">&#36;pc</span>
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span></code></pre><p>此后程序再中断时，就可以显示出汇编代码了：</p>
 <pre><code><span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> r
 Starting program: /home/liigo/temp/test_jmp/test_jmp/gdb-sample
 
 Breakpoint 1, main <span class="token punctuation">(</span><span class="token punctuation">)</span> at gdb-sample.c:19
 19 n <span class="token operator">=</span> 1<span class="token punctuation">;</span>
-1: x/i <span class="token variable">$pc</span> 0x804835c <span class="token operator">&lt;</span>main+16<span class="token operator">></span>: movl <span class="token variable">$0x1</span>,0xfffffffc<span class="token punctuation">(</span>%ebp<span class="token punctuation">)</span></code></pre><p>看到了汇编代码，“n = 1;”对应的汇编代码是“movl $0x1,0xfffffffc(%ebp)”。</p>
+1: x/i <span class="token variable">&#36;pc</span> 0x804835c <span class="token operator">&lt;</span>main+16<span class="token operator">></span>: movl <span class="token variable">&#36;0x1</span>,0xfffffffc<span class="token punctuation">(</span>%ebp<span class="token punctuation">)</span></code></pre><p>看到了汇编代码，“n = 1;”对应的汇编代码是“movl $0x1,0xfffffffc(%ebp)”。</p>
 <p>并且以后程序每次中断都将显示下一条汇编指定（“si”命令用于执行一条汇编代码——区别于“s”执行一行C代码）：</p>
 <pre><code><span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> si
 20 n++<span class="token punctuation">;</span>
-1: x/i <span class="token variable">$pc</span> 0x8048363 <span class="token operator">&lt;</span>main+23<span class="token operator">></span>: lea 0xfffffffc<span class="token punctuation">(</span>%ebp<span class="token punctuation">)</span>,%eax
+1: x/i <span class="token variable">&#36;pc</span> 0x8048363 <span class="token operator">&lt;</span>main+23<span class="token operator">></span>: lea 0xfffffffc<span class="token punctuation">(</span>%ebp<span class="token punctuation">)</span>,%eax
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> si
 0x08048366 20 n++<span class="token punctuation">;</span>
-1: x/i <span class="token variable">$pc</span> 0x8048366 <span class="token operator">&lt;</span>main+26<span class="token operator">></span>: incl <span class="token punctuation">(</span>%eax<span class="token punctuation">)</span>
+1: x/i <span class="token variable">&#36;pc</span> 0x8048366 <span class="token operator">&lt;</span>main+26<span class="token operator">></span>: incl <span class="token punctuation">(</span>%eax<span class="token punctuation">)</span>
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> si
 21 n--<span class="token punctuation">;</span>
-1: x/i <span class="token variable">$pc</span> 0x8048368 <span class="token operator">&lt;</span>main+28<span class="token operator">></span>: lea 0xfffffffc<span class="token punctuation">(</span>%ebp<span class="token punctuation">)</span>,%eax
+1: x/i <span class="token variable">&#36;pc</span> 0x8048368 <span class="token operator">&lt;</span>main+28<span class="token operator">></span>: lea 0xfffffffc<span class="token punctuation">(</span>%ebp<span class="token punctuation">)</span>,%eax
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> si
 0x0804836b 21 n--<span class="token punctuation">;</span>
-1: x/i <span class="token variable">$pc</span> 0x804836b <span class="token operator">&lt;</span>main+31<span class="token operator">></span>: decl <span class="token punctuation">(</span>%eax<span class="token punctuation">)</span>
+1: x/i <span class="token variable">&#36;pc</span> 0x804836b <span class="token operator">&lt;</span>main+31<span class="token operator">></span>: decl <span class="token punctuation">(</span>%eax<span class="token punctuation">)</span>
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> si
 23 nGlobalVar +<span class="token operator">=</span> 100<span class="token punctuation">;</span>
-1: x/i <span class="token variable">$pc</span> 0x804836d <span class="token operator">&lt;</span>main+33<span class="token operator">></span>: addl <span class="token variable">$0x64</span>,0x80494fc</code></pre><p>接下来我们试一下命令“b *&lt;函数名称&gt;”。</p>
+1: x/i <span class="token variable">&#36;pc</span> 0x804836d <span class="token operator">&lt;</span>main+33<span class="token operator">></span>: addl <span class="token variable">&#36;0x64</span>,0x80494fc</code></pre><p>接下来我们试一下命令“b *&lt;函数名称&gt;”。</p>
 <p>为了更简明，有必要先删除目前所有断点（使用“d”命令——Delete breakpoint）：</p>
 <pre><code><span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> d
 Delete all breakpoints? <span class="token punctuation">(</span>y or n<span class="token punctuation">)</span> y
@@ -322,26 +322,26 @@ Starting program: /home/liigo/temp/test_jmp/test_jmp/gdb-sample
 
 Breakpoint 4, main <span class="token punctuation">(</span><span class="token punctuation">)</span> at gdb-sample.c:17
 17 <span class="token punctuation">{</span>
-1: x/i <span class="token variable">$pc</span> 0x804834c <span class="token operator">&lt;</span>main<span class="token operator">></span>: push %ebp
+1: x/i <span class="token variable">&#36;pc</span> 0x804834c <span class="token operator">&lt;</span>main<span class="token operator">></span>: push %ebp
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> si
 0x0804834d 17 <span class="token punctuation">{</span>
-1: x/i <span class="token variable">$pc</span> 0x804834d <span class="token operator">&lt;</span>main+1<span class="token operator">></span>: mov %esp,%ebp
+1: x/i <span class="token variable">&#36;pc</span> 0x804834d <span class="token operator">&lt;</span>main+1<span class="token operator">></span>: mov %esp,%ebp
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> si
 0x0804834f <span class="token keyword">in</span> main <span class="token punctuation">(</span><span class="token punctuation">)</span> at gdb-sample.c:17
 17 <span class="token punctuation">{</span>
-1: x/i <span class="token variable">$pc</span> 0x804834f <span class="token operator">&lt;</span>main+3<span class="token operator">></span>: sub <span class="token variable">$0x8</span>,%esp
+1: x/i <span class="token variable">&#36;pc</span> 0x804834f <span class="token operator">&lt;</span>main+3<span class="token operator">></span>: sub <span class="token variable">&#36;0x8</span>,%esp
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> si
 0x08048352 17 <span class="token punctuation">{</span>
-1: x/i <span class="token variable">$pc</span> 0x8048352 <span class="token operator">&lt;</span>main+6<span class="token operator">></span>: and <span class="token variable">$0xfffffff0</span>,%esp
+1: x/i <span class="token variable">&#36;pc</span> 0x8048352 <span class="token operator">&lt;</span>main+6<span class="token operator">></span>: and <span class="token variable">&#36;0xfffffff0</span>,%esp
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> si
 0x08048355 17 <span class="token punctuation">{</span>
-1: x/i <span class="token variable">$pc</span> 0x8048355 <span class="token operator">&lt;</span>main+9<span class="token operator">></span>: mov <span class="token variable">$0x0</span>,%eax
+1: x/i <span class="token variable">&#36;pc</span> 0x8048355 <span class="token operator">&lt;</span>main+9<span class="token operator">></span>: mov <span class="token variable">&#36;0x0</span>,%eax
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> si
 0x0804835a 17 <span class="token punctuation">{</span>
-1: x/i <span class="token variable">$pc</span> 0x804835a <span class="token operator">&lt;</span>main+14<span class="token operator">></span>: sub %eax,%esp
+1: x/i <span class="token variable">&#36;pc</span> 0x804835a <span class="token operator">&lt;</span>main+14<span class="token operator">></span>: sub %eax,%esp
 <span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> si
 19 n <span class="token operator">=</span> 1<span class="token punctuation">;</span>
-1: x/i <span class="token variable">$pc</span> 0x804835c <span class="token operator">&lt;</span>main+16<span class="token operator">></span>: movl <span class="token variable">$0x1</span>,0xfffffffc<span class="token punctuation">(</span>%ebp<span class="token punctuation">)</span></code></pre><p>此时可以使用“i r”命令显示寄存器中的当前值———“i r”即“Infomation Register”：</p>
+1: x/i <span class="token variable">&#36;pc</span> 0x804835c <span class="token operator">&lt;</span>main+16<span class="token operator">></span>: movl <span class="token variable">&#36;0x1</span>,0xfffffffc<span class="token punctuation">(</span>%ebp<span class="token punctuation">)</span></code></pre><p>此时可以使用“i r”命令显示寄存器中的当前值———“i r”即“Infomation Register”：</p>
 <pre><code><span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> i r
 eax 0xbffff6a4 -1073744220
 ecx 0x42015554 1107383636
@@ -421,7 +421,7 @@ q 退出调试</code></pre><pre><code class="language-c"># 测试用代码
 </div>
 <script>
 var _hmt = _hmt || []; (function() {var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?a542c0213a9aa8ae29fccdc8a18b91ef"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })(); </script>
-<script type="text/javascript" src="../js/dt.js?v=1555577029551"></script>
-<script type="text/javascript" src="../js/index.js?v=1555577029551"></script>
+<script type="text/javascript" src="../js/dt.js?v=1555577280795"></script>
+<script type="text/javascript" src="../js/index.js?v=1555577280795"></script>
 </body>
 </html>

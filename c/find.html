@@ -10,7 +10,7 @@
     <meta name="keywords" content="Linux,Command,命令大全,Linux命令手册,find,在指定目录下查找文件">
     <title>find 命令，Linux find 命令详解：在指定目录下查找文件 -  Linux 命令搜索引擎</title>
     <link rel="shortcut icon" href="../img/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="../css/index.css?v=1555577029471">
+    <link rel="stylesheet" type="text/css" href="../css/index.css?v=1555577280689">
 </head>
 <body>
 <a href="https://github.com/jaywcjlove/linux-command" target="_blank" class="github-corner"> <svg viewBox="0 0 250 250"><!-- kenny wang <wowohoo@qq.com> https://github.com/jaywcjlove --> <title>logo</title> <desc>Linux Command Logo. https://github.com/jaywcjlove</desc><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg> </a>
@@ -109,8 +109,8 @@ find <span class="token punctuation">.</span> <span class="token operator">-</sp
 
 <span class="token function">find</span> <span class="token keyword">.</span> -name <span class="token string">"*.txt"</span> -o -name <span class="token string">"*.pdf"</span></code></pre><p>匹配文件路径或者文件</p>
 <pre><code><span class="token function">find</span> /usr/ -path <span class="token string">"*local*"</span></code></pre><p>基于正则表达式匹配文件路径</p>
-<pre><code><span class="token function">find</span> <span class="token keyword">.</span> -regex <span class="token string">".*\(\.txt\|\.pdf\)$"</span></code></pre><p>同上，但忽略大小写</p>
-<pre><code><span class="token function">find</span> <span class="token keyword">.</span> -iregex <span class="token string">".*\(\.txt\|\.pdf\)$"</span></code></pre><h4 id="否定参数">否定参数</h4><p>找出/home下不是以.txt结尾的文件</p>
+<pre><code><span class="token function">find</span> <span class="token keyword">.</span> -regex <span class="token string">".*\(\.txt\|\.pdf\)&#36;"</span></code></pre><p>同上，但忽略大小写</p>
+<pre><code><span class="token function">find</span> <span class="token keyword">.</span> -iregex <span class="token string">".*\(\.txt\|\.pdf\)&#36;"</span></code></pre><h4 id="否定参数">否定参数</h4><p>找出/home下不是以.txt结尾的文件</p>
 <pre><code><span class="token function">find</span> /home <span class="token operator">!</span> -name <span class="token string">"*.txt"</span></code></pre><h4 id="根据文件类型进行搜索">根据文件类型进行搜索</h4><pre><code><span class="token function">find</span> <span class="token keyword">.</span> -type 类型参数</code></pre><p>类型参数列表：</p>
 <ul>
 <li><strong>f</strong>  普通文件</li>
@@ -154,7 +154,7 @@ find <span class="token punctuation">.</span> <span class="token operator">-</sp
 <pre><code><span class="token function">find</span> <span class="token keyword">.</span> -type f -group sunk</code></pre><h4 id="借助<code>-exec</code>选项与其他命令结合使用">借助<code>-exec</code>选项与其他命令结合使用</h4><p>找出当前目录下所有root的文件，并把所有权更改为用户tom</p>
 <pre><code><span class="token function">find</span> .-type f -user root -exec <span class="token function">chown</span> tom <span class="token punctuation">{</span><span class="token punctuation">}</span> \<span class="token punctuation">;</span></code></pre><p>上例中， <strong>{}</strong>  用于与 <strong>-exec</strong> 选项结合使用来匹配所有文件，然后会被替换为相应的文件名。</p>
 <p>找出自己家目录下所有的.txt文件并删除</p>
-<pre><code><span class="token function">find</span> <span class="token variable">$HOME</span>/. -name <span class="token string">"*.txt"</span> -ok <span class="token function">rm</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> \<span class="token punctuation">;</span></code></pre><p>上例中， <strong>-ok</strong> 和 <strong>-exec</strong> 行为一样，不过它会给出提示，是否执行相应的操作。</p>
+<pre><code><span class="token function">find</span> <span class="token variable">&#36;HOME</span>/. -name <span class="token string">"*.txt"</span> -ok <span class="token function">rm</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> \<span class="token punctuation">;</span></code></pre><p>上例中， <strong>-ok</strong> 和 <strong>-exec</strong> 行为一样，不过它会给出提示，是否执行相应的操作。</p>
 <p>查找当前目录下所有.txt文件并把他们拼接起来写入到all.txt文件中</p>
 <pre><code><span class="token function">find</span> <span class="token keyword">.</span> -type f -name <span class="token string">"*.txt"</span> -exec <span class="token function">cat</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> \<span class="token punctuation">;</span><span class="token operator">></span> all.txt</code></pre><p>将30天前的.log文件移动到old目录中</p>
 <pre><code><span class="token function">find</span> <span class="token keyword">.</span> -type f -mtime +30 -name <span class="token string">"*.log"</span> -exec <span class="token function">cp</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> old \<span class="token punctuation">;</span></code></pre><p>找出当前目录下所有.txt文件并以“File:文件名”的形式打印出来</p>
@@ -177,7 +177,7 @@ find <span class="token operator">~</span> \<span class="token punctuation">(</s
 <pre><code class="language-bash">find <span class="token operator">~</span> <span class="token operator">-</span>perm <span class="token operator">-</span>o<span class="token operator">=</span>r</code></pre>
 <p>删除 mac 下自动生成的文件</p>
 <pre><code><span class="token function">find</span> ./ -name <span class="token string">'__MACOSX'</span> -depth -exec <span class="token function">rm</span> -rf <span class="token punctuation">{</span><span class="token punctuation">}</span> \<span class="token punctuation">;</span></code></pre><p>统计代码行数</p>
-<pre><code><span class="token function">find</span> <span class="token keyword">.</span> -name <span class="token string">"*.java"</span><span class="token operator">|</span><span class="token function">xargs</span> <span class="token function">cat</span><span class="token operator">|</span><span class="token function">grep</span> -v ^$<span class="token operator">|</span><span class="token function">wc</span> -l <span class="token comment"># 代码行数统计, 排除空行</span></code></pre><!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+<pre><code><span class="token function">find</span> <span class="token keyword">.</span> -name <span class="token string">"*.java"</span><span class="token operator">|</span><span class="token function">xargs</span> <span class="token function">cat</span><span class="token operator">|</span><span class="token function">grep</span> -v ^&#36;<span class="token operator">|</span><span class="token function">wc</span> -l <span class="token comment"># 代码行数统计, 排除空行</span></code></pre><!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
 </div>
 
@@ -200,7 +200,7 @@ find <span class="token operator">~</span> \<span class="token punctuation">(</s
 </div>
 <script>
 var _hmt = _hmt || []; (function() {var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?a542c0213a9aa8ae29fccdc8a18b91ef"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })(); </script>
-<script type="text/javascript" src="../js/dt.js?v=1555577029471"></script>
-<script type="text/javascript" src="../js/index.js?v=1555577029472"></script>
+<script type="text/javascript" src="../js/dt.js?v=1555577280689"></script>
+<script type="text/javascript" src="../js/index.js?v=1555577280689"></script>
 </body>
 </html>
