@@ -10,7 +10,7 @@
     <meta name="keywords" content="Linux,Command,命令大全,Linux命令手册,rsync,远程数据同步工具">
     <title>rsync 命令，Linux rsync 命令详解：远程数据同步工具 -  Linux 命令搜索引擎</title>
     <link rel="shortcut icon" href="../img/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="../css/index.css?v=1556459563645">
+    <link rel="stylesheet" type="text/css" href="../css/index.css?v=1556469651271">
 </head>
 <body>
 <a href="https://github.com/jaywcjlove/linux-command" target="_blank" class="github-corner"> <svg viewBox="0 0 250 250"><!-- kenny wang <wowohoo@qq.com> https://github.com/jaywcjlove --> <title>logo</title> <desc>Linux Command Logo. https://github.com/jaywcjlove</desc><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg> </a>
@@ -42,12 +42,13 @@
 
 <h1 id="rsync">rsync</h1><p>远程数据同步工具</p>
 <h2 id="补充说明">补充说明</h2><p><strong>rsync命令</strong> 是一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件。rsync使用所谓的“rsync算法”来使本地和远程两个主机之间的文件达到同步，这个算法只传送两个文件的不同部分，而不是每次都整份传送，因此速度相当快。 rsync是一个功能非常强大的工具，其命令也有很多功能特色选项，我们下面就对它的选项一一进行分析说明。</p>
-<h3 id="语法">语法</h3><pre><code><span class="token function">rsync</span> <span class="token punctuation">[</span>OPTION<span class="token punctuation">]</span><span class="token punctuation">..</span>. SRC DEST
+<h3 id="语法">语法</h3><pre><code class="language-shell"><span class="token function">rsync</span> <span class="token punctuation">[</span>OPTION<span class="token punctuation">]</span><span class="token punctuation">..</span>. SRC DEST
 <span class="token function">rsync</span> <span class="token punctuation">[</span>OPTION<span class="token punctuation">]</span><span class="token punctuation">..</span>. SRC <span class="token punctuation">[</span>USER@<span class="token punctuation">]</span>host:DEST
 <span class="token function">rsync</span> <span class="token punctuation">[</span>OPTION<span class="token punctuation">]</span><span class="token punctuation">..</span>. <span class="token punctuation">[</span>USER@<span class="token punctuation">]</span>HOST:SRC DEST
 <span class="token function">rsync</span> <span class="token punctuation">[</span>OPTION<span class="token punctuation">]</span><span class="token punctuation">..</span>. <span class="token punctuation">[</span>USER@<span class="token punctuation">]</span>HOST::SRC DEST
 <span class="token function">rsync</span> <span class="token punctuation">[</span>OPTION<span class="token punctuation">]</span><span class="token punctuation">..</span>. SRC <span class="token punctuation">[</span>USER@<span class="token punctuation">]</span>HOST::DEST
-<span class="token function">rsync</span> <span class="token punctuation">[</span>OPTION<span class="token punctuation">]</span><span class="token punctuation">..</span>. rsync://<span class="token punctuation">[</span>USER@<span class="token punctuation">]</span>HOST<span class="token punctuation">[</span>:PORT<span class="token punctuation">]</span>/SRC <span class="token punctuation">[</span>DEST<span class="token punctuation">]</span></code></pre><p>对应于以上六种命令格式，rsync有六种不同的工作模式：</p>
+<span class="token function">rsync</span> <span class="token punctuation">[</span>OPTION<span class="token punctuation">]</span><span class="token punctuation">..</span>. rsync://<span class="token punctuation">[</span>USER@<span class="token punctuation">]</span>HOST<span class="token punctuation">[</span>:PORT<span class="token punctuation">]</span>/SRC <span class="token punctuation">[</span>DEST<span class="token punctuation">]</span></code></pre>
+<p>对应于以上六种命令格式，rsync有六种不同的工作模式：</p>
 <ol>
 <li>拷贝本地文件。当SRC和DES路径信息都不包含有单个冒号&quot;:&quot;分隔符时就启动这种工作模式。如：<code>rsync -a /data /backup</code></li>
 <li>使用一个远程shell程序(如rsh、ssh)来实现将本地机器的内容拷贝到远程机器。当DST路径地址包含单个冒号&quot;:&quot;分隔符时启动该模式。如：<code>rsync -avz *.c foo:src</code></li>
@@ -56,7 +57,7 @@
 <li>从本地机器拷贝文件到远程rsync服务器中。当DST路径信息包含&quot;::&quot;分隔符时启动该模式。如：<code>rsync -av /databack root@192.168.78.192::www</code></li>
 <li>列远程机的文件列表。这类似于rsync传输，不过只要在命令中省略掉本地机信息即可。如：<code>rsync -v rsync://192.168.78.192/www</code></li>
 </ol>
-<h3 id="选项">选项</h3><pre><code>-v, --verbose 详细模式输出。
+<h3 id="选项">选项</h3><pre><code class="language-shell">-v, --verbose 详细模式输出。
 -q, --quiet 精简输出模式。
 -c, --checksum 打开校验开关，强制对文件传输进行校验。
 -a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD。
@@ -116,12 +117,14 @@
 --log-format<span class="token operator">=</span>formAT 指定日志文件格式。
 --password-file<span class="token operator">=</span>FILE 从FILE中得到密码。
 --bwlimit<span class="token operator">=</span>KBPS 限制I/O带宽，KBytes per second。
--h, --help 显示帮助信息。</code></pre><h3 id="实例">实例</h3><p> <strong>SSH方式</strong></p>
+-h, --help 显示帮助信息。</code></pre>
+<h3 id="实例">实例</h3><p> <strong>SSH方式</strong></p>
 <p>首先在服务端启动ssh服务：</p>
-<pre><code><span class="token function">service</span> sshd start
-启动 sshd： <span class="token punctuation">[</span>确定<span class="token punctuation">]</span></code></pre><p> <strong>使用rsync进行同步</strong></p>
+<pre><code class="language-shell"><span class="token function">service</span> sshd start
+启动 sshd： <span class="token punctuation">[</span>确定<span class="token punctuation">]</span></code></pre>
+<p> <strong>使用rsync进行同步</strong></p>
 <p>接下来就可以在客户端使用rsync命令来备份服务端上的数据了，SSH方式是通过系统用户来进行备份的，如下：</p>
-<pre><code><span class="token function">rsync</span> -vzrtopg --progress -e <span class="token function">ssh</span> --delete work@172.16.78.192:/www/* /databack/experiment/rsync
+<pre><code class="language-shell"><span class="token function">rsync</span> -vzrtopg --progress -e <span class="token function">ssh</span> --delete work@172.16.78.192:/www/* /databack/experiment/rsync
 work@172.16.78.192's password:
 receiving <span class="token function">file</span> list <span class="token punctuation">..</span>.
 5 files to consider
@@ -135,10 +138,11 @@ c
 <span class="token function">dd</span>
 100663296 100% 42.22MB/s 0:00:02 <span class="token punctuation">(</span>4, 80.0% of 5<span class="token punctuation">)</span>
 sent 96 bytes received 98190 bytes 11563.06 bytes/sec
-total size is 100663363 speedup is 1024.19</code></pre><p>上面的信息描述了整个的备份过程，以及总共备份数据的大小。</p>
+total size is 100663363 speedup is 1024.19</code></pre>
+<p>上面的信息描述了整个的备份过程，以及总共备份数据的大小。</p>
 <p> <strong>后台服务方式</strong></p>
 <p>启动rsync服务，编辑<code>/etc/xinetd.d/rsync</code>文件，将其中的<code>disable=yes</code>改为<code>disable=no</code>，并重启xinetd服务，如下：</p>
-<pre><code><span class="token function">vi</span> /etc/xinetd.d/rsync
+<pre><code class="language-shell"><span class="token function">vi</span> /etc/xinetd.d/rsync
 
 <span class="token comment">#default: off</span>
 <span class="token comment"># description: The rsync server is a good addition to an ftp server, as it \</span>
@@ -151,10 +155,12 @@ user <span class="token operator">=</span> root
 server <span class="token operator">=</span> /usr/bin/rsync
 server_args <span class="token operator">=</span> --daemon
 log_on_failure +<span class="token operator">=</span> USERID
-<span class="token punctuation">}</span></code></pre><pre><code>/etc/init.d/xinetd restart
+<span class="token punctuation">}</span></code></pre>
+<pre><code class="language-shell">/etc/init.d/xinetd restart
 停止 xinetd： <span class="token punctuation">[</span>确定<span class="token punctuation">]</span>
-启动 xinetd： <span class="token punctuation">[</span>确定<span class="token punctuation">]</span></code></pre><p>创建配置文件，默认安装好rsync程序后，并不会自动创建rsync的主配置文件，需要手工来创建，其主配置文件为“/etc/rsyncd.conf”，创建该文件并插入如下内容：</p>
-<pre><code><span class="token function">vi</span> /etc/rsyncd.conf
+启动 xinetd： <span class="token punctuation">[</span>确定<span class="token punctuation">]</span></code></pre>
+<p>创建配置文件，默认安装好rsync程序后，并不会自动创建rsync的主配置文件，需要手工来创建，其主配置文件为“/etc/rsyncd.conf”，创建该文件并插入如下内容：</p>
+<pre><code class="language-shell"><span class="token function">vi</span> /etc/rsyncd.conf
 
 uid<span class="token operator">=</span>root
 gid<span class="token operator">=</span>root
@@ -170,10 +176,12 @@ comment<span class="token operator">=</span> backup web
 path<span class="token operator">=</span>/www
 <span class="token function">read</span> only <span class="token operator">=</span> no
 exclude<span class="token operator">=</span>test
-auth users<span class="token operator">=</span>work</code></pre><p>创建密码文件，采用这种方式不能使用系统用户对客户端进行认证，所以需要创建一个密码文件，其格式为“username:password”，用户名可以和密码可以随便定义，最好不要和系统帐户一致，同时要把创建的密码文件权限设置为600，这在前面的模块参数做了详细介绍。</p>
-<pre><code><span class="token keyword">echo</span> <span class="token string">"work:abc123"</span> <span class="token operator">></span> /etc/rsyncd.passwd
-<span class="token function">chmod</span> 600 /etc/rsyncd.passwd</code></pre><p>备份，完成以上工作，现在就可以对数据进行备份了，如下：</p>
-<pre><code><span class="token function">rsync</span> -avz --progress --delete work@172.16.78.192::www /databack/experiment/rsync
+auth users<span class="token operator">=</span>work</code></pre>
+<p>创建密码文件，采用这种方式不能使用系统用户对客户端进行认证，所以需要创建一个密码文件，其格式为“username:password”，用户名可以和密码可以随便定义，最好不要和系统帐户一致，同时要把创建的密码文件权限设置为600，这在前面的模块参数做了详细介绍。</p>
+<pre><code class="language-shell"><span class="token keyword">echo</span> <span class="token string">"work:abc123"</span> <span class="token operator">></span> /etc/rsyncd.passwd
+<span class="token function">chmod</span> 600 /etc/rsyncd.passwd</code></pre>
+<p>备份，完成以上工作，现在就可以对数据进行备份了，如下：</p>
+<pre><code class="language-shell"><span class="token function">rsync</span> -avz --progress --delete work@172.16.78.192::www /databack/experiment/rsync
 
 Password:
 receiving <span class="token function">file</span> list <span class="token punctuation">..</span>.
@@ -188,8 +196,9 @@ c
 <span class="token function">dd</span>
 100663296 100% 37.49MB/s 0:00:02 <span class="token punctuation">(</span>4, 100.0% of 6<span class="token punctuation">)</span>
 sent 172 bytes received 98276 bytes 17899.64 bytes/sec
-total size is 150995011 speedup is 1533.75</code></pre><p>恢复，当服务器的数据出现问题时，那么这时就需要通过客户端的数据对服务端进行恢复，但前提是服务端允许客户端有写入权限，否则也不能在客户端直接对服务端进行恢复，使用rsync对数据进行恢复的方法如下：</p>
-<pre><code><span class="token function">rsync</span> -avz --progress /databack/experiment/rsync/ work@172.16.78.192::www
+total size is 150995011 speedup is 1533.75</code></pre>
+<p>恢复，当服务器的数据出现问题时，那么这时就需要通过客户端的数据对服务端进行恢复，但前提是服务端允许客户端有写入权限，否则也不能在客户端直接对服务端进行恢复，使用rsync对数据进行恢复的方法如下：</p>
+<pre><code class="language-shell"><span class="token function">rsync</span> -avz --progress /databack/experiment/rsync/ work@172.16.78.192::www
 
 Password:
 building <span class="token function">file</span> list <span class="token punctuation">..</span>.
@@ -200,7 +209,8 @@ b
 67 100% 0.00kB/s 0:00:00 <span class="token punctuation">(</span>2, 66.7% of 6<span class="token punctuation">)</span>
 c
 sent 258 bytes received 76 bytes 95.43 bytes/sec
-total size is 150995011 speedup is 452080.87</code></pre><!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+total size is 150995011 speedup is 452080.87</code></pre>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 </div>
 
 <div class="footer ">
@@ -222,7 +232,7 @@ total size is 150995011 speedup is 452080.87</code></pre><!-- Linux命令行搜�
 </div>
 <script>
 var _hmt = _hmt || []; (function() {var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?a542c0213a9aa8ae29fccdc8a18b91ef"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })(); </script>
-<script type="text/javascript" src="../js/dt.js?v=1556459563646"></script>
-<script type="text/javascript" src="../js/index.js?v=1556459563646"></script>
+<script type="text/javascript" src="../js/dt.js?v=1556469651271"></script>
+<script type="text/javascript" src="../js/index.js?v=1556469651271"></script>
 </body>
 </html>

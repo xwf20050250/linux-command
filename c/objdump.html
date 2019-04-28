@@ -10,7 +10,7 @@
     <meta name="keywords" content="Linux,Command,命令大全,Linux命令手册,objdump,显示二进制文件信息">
     <title>objdump 命令，Linux objdump 命令详解：显示二进制文件信息 -  Linux 命令搜索引擎</title>
     <link rel="shortcut icon" href="../img/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="../css/index.css?v=1556459563429">
+    <link rel="stylesheet" type="text/css" href="../css/index.css?v=1556469651078">
 </head>
 <body>
 <a href="https://github.com/jaywcjlove/linux-command" target="_blank" class="github-corner"> <svg viewBox="0 0 250 250"><!-- kenny wang <wowohoo@qq.com> https://github.com/jaywcjlove --> <title>logo</title> <desc>Linux Command Logo. https://github.com/jaywcjlove</desc><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg> </a>
@@ -42,44 +42,37 @@
 
 <h1 id="objdump">objdump</h1><p>显示二进制文件信息</p>
 <h2 id="补充说明">补充说明</h2><p><strong>objdump命令</strong> 是用查看目标文件或者可执行的目标文件的构成的gcc工具。</p>
-<h3 id="选项">选项</h3><pre><code>--archive-headers 
--a 
-显示档案库的成员信息,类似ls -l将lib*.a的信息列出。 
+<h3 id="选项">选项</h3><pre><code class="language-shell">-a --archive-headers 
+<span class="token comment"># 显示档案库的成员信息,类似ls -l将lib*.a的信息列出。 </span>
 
--b bfdname 
---target<span class="token operator">=</span>bfdname 
-指定目标码格式。这不是必须的，objdump能自动识别许多格式，比如： 
+-b bfdname --target<span class="token operator">=</span>bfdname 
+<span class="token comment"># 指定目标码格式。这不是必须的，objdump能自动识别许多格式，比如： </span>
 
 objdump -b oasys -m vax -h fu.o 
-显示fu.o的头部摘要信息，明确指出该文件是Vax系统下用Oasys编译器生成的目标文件。objdump -i将给出这里可以指定的目标码格式列表。 
+<span class="token comment"># 显示fu.o的头部摘要信息，明确指出该文件是Vax系统下用Oasys编译器生成的目标文件。objdump -i将给出这里可以指定的目标码格式列表。 </span>
 
--C 
---demangle 
-将底层的符号名解码成用户级名字，除了去掉所开头的下划线之外，还使得C++函数名以可理解的方式显示出来。 
-
+-C --demangle 
+<span class="token comment"># 将底层的符号名解码成用户级名字，除了去掉所开头的下划线之外，还使得C++函数名以可理解的方式显示出来。 </span>
 --debugging 
 -g 
-显示调试信息。企图解析保存在文件中的调试信息并以C语言的语法显示出来。仅仅支持某些类型的调试信息。有些其他的格式被readelf -w支持。 
+<span class="token comment"># 显示调试信息。企图解析保存在文件中的调试信息并以C语言的语法显示出来。仅仅支持某些类型的调试信息。有些其他的格式被readelf -w支持。 </span>
 
--e 
---debugging-tags 
-类似-g选项，但是生成的信息是和ctags工具相兼容的格式。 
-
+-e --debugging-tags 
+<span class="token comment"># 类似-g选项，但是生成的信息是和ctags工具相兼容的格式。 </span>
 --disassemble 
 -d 
-从objfile中反汇编那些特定指令机器码的section。 
+<span class="token comment"># 从objfile中反汇编那些特定指令机器码的section。 </span>
 
--D 
---disassemble-all 
-与 -d 类似，但反汇编所有section. 
+-D --disassemble-all 
+<span class="token comment"># 与 -d 类似，但反汇编所有section. </span>
 
 --prefix-addresses 
-反汇编的时候，显示每一行的完整地址。这是一种比较老的反汇编格式。 
+<span class="token comment"># 反汇编的时候，显示每一行的完整地址。这是一种比较老的反汇编格式。 </span>
 
 -EB 
 -EL 
 --endian<span class="token operator">=</span><span class="token punctuation">{</span>big<span class="token operator">|</span>little<span class="token punctuation">}</span> 
-指定目标文件的小端。这个项将影响反汇编出来的指令。在反汇编的文件没描述小端信息的时候用。例如S-records. 
+<span class="token comment"># 指定目标文件的小端。这个项将影响反汇编出来的指令。在反汇编的文件没描述小端信息的时候用。例如S-records. </span>
 
 -f 
 --file-headers 
@@ -158,8 +151,10 @@ objdump -b oasys -m vax -h fu.o
 --disassemble-zeroes 
 一般反汇编输出将省略大块的零，该选项使得这些零块也被反汇编。 
 
-@file 可以将选项集中到一个文件中，然后使用这个@file选项载入。</code></pre><h3 id="实例">实例</h3><p>首先，在给出后面大部分测试所基于的源代码以及编译指令。 源代码如下： </p>
-<pre><code>root@localhost <span class="token punctuation">[</span>test<span class="token punctuation">]</span><span class="token comment"># nl mytest.cpp </span></code></pre><pre><code>void printTest<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+@file 可以将选项集中到一个文件中，然后使用这个@file选项载入。</code></pre>
+<h3 id="实例">实例</h3><p>首先，在给出后面大部分测试所基于的源代码以及编译指令。 源代码如下： </p>
+<pre><code class="language-shell">root@localhost <span class="token punctuation">[</span>test<span class="token punctuation">]</span><span class="token comment"># nl mytest.cpp </span></code></pre>
+<pre><code class="language-shell">void printTest<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     char a<span class="token punctuation">;</span>
     a <span class="token operator">=</span> <span class="token string">'a'</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -167,24 +162,29 @@ objdump -b oasys -m vax -h fu.o
 void printTest2<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 int a <span class="token operator">=</span> 2<span class="token punctuation">;</span>
 a+<span class="token operator">=</span>2<span class="token punctuation">;</span>
-<span class="token punctuation">}</span> </code></pre><p>对以上源代码进行编译，如下： </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># g++ -c -g mytest.cpp </span></code></pre><p>这里，生成的文件是mytest.o，为了方便测试包含了调试的信息，对可执行文件的测试，显示的结果类似。 </p>
+<span class="token punctuation">}</span> </code></pre>
+<p>对以上源代码进行编译，如下： </p>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># g++ -c -g mytest.cpp </span></code></pre>
+<p>这里，生成的文件是mytest.o，为了方便测试包含了调试的信息，对可执行文件的测试，显示的结果类似。 </p>
 <p> *<em>查看当前使用的objdump的版本号： *</em> </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -V </span>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -V </span>
 GNU objdump 2.17.50.0.6-14.el5 20061020 
 Copyright 2005 <span class="token function">free</span> Software Foundation, Inc. 
 This program is <span class="token function">free</span> software<span class="token punctuation">;</span> you may redistribute it under the terms of 
-the GNU General Public License.  This program has absolutely no warranty. </code></pre><p> *<em>查看档案库文件中的信息： *</em> </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -a libmy2.a </span>
+the GNU General Public License.  This program has absolutely no warranty. </code></pre>
+<p> *<em>查看档案库文件中的信息： *</em> </p>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -a libmy2.a </span>
 In archive libmy2.a: 
 myfile.o:     <span class="token function">file</span> <span class="token function">format</span> elf32-i386 
 rwxrwxrwx 0/0   2724 Nov 16 16:06 2009 myfile.o 
 mytest.o:     <span class="token function">file</span> <span class="token function">format</span> elf32-i386 
-rw-r--r-- 0/0    727 Jul 13 15:32 2011 mytest.o </code></pre><p> <em>*这里，libmy2.a是一个使用ar命令将多个</em>.o目标文件打包而生成的静态库。命令的输出类似<code>ar -tv</code>，相比较<code>ar -tv</code>输出如下： ** </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># ar -tv libmy2.a </span>
+rw-r--r-- 0/0    727 Jul 13 15:32 2011 mytest.o </code></pre>
+<p> <em>*这里，libmy2.a是一个使用ar命令将多个</em>.o目标文件打包而生成的静态库。命令的输出类似<code>ar -tv</code>，相比较<code>ar -tv</code>输出如下： ** </p>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># ar -tv libmy2.a </span>
 rwxrwxrwx 0/0   2724 Nov 16 16:06 2009 myfile.o 
-rw-r--r-- 0/0    727 Jul 13 15:32 2011 mytest.o </code></pre><p>显示可用的架构和目标结构列表： </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -i </span>
+rw-r--r-- 0/0    727 Jul 13 15:32 2011 mytest.o </code></pre>
+<p>显示可用的架构和目标结构列表： </p>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -i </span>
 BFD header <span class="token function">file</span> version 2.17.50.0.6-14.el5 20061020 
 elf32-i386 
 <span class="token punctuation">(</span>header little endian, data little endian<span class="token punctuation">)</span> 
@@ -235,15 +235,17 @@ trad-core
           i386 elf64-little elf64-big elf32-little elf32-big srec symbolsrec 
 
               tekhex binary ihex trad-core 
-          i386 tekhex binary ihex --------- </code></pre><p>这里，显示的信息是相对于 -b 或者 -m 选项可用的架构和目标格式列表。 </p>
+          i386 tekhex binary ihex --------- </code></pre>
+<p>这里，显示的信息是相对于 -b 或者 -m 选项可用的架构和目标格式列表。 </p>
 <p> *<em>显示mytest.o文件中的text段的内容： *</em> </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump --section=.text -s mytest.o </span>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump --section=.text -s mytest.o </span>
 mytest.o:     <span class="token function">file</span> <span class="token function">format</span> elf32-i386 
 Contents of section .text: 
 0000 5589e583 ec10c645 ff61c9c3 5589e583  U<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>E.a<span class="token punctuation">..</span>U<span class="token punctuation">..</span>. 
-0010 ec10c745 fc020000 008345fc 02c9c3    <span class="token punctuation">..</span>.E<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>E<span class="token punctuation">..</span><span class="token punctuation">..</span> </code></pre><p>这里注意，不能单独使用-j或者--section，例如<code>objdump --section=.text mytest.o</code>是不会运行成功的。 </p>
+0010 ec10c745 fc020000 008345fc 02c9c3    <span class="token punctuation">..</span>.E<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>E<span class="token punctuation">..</span><span class="token punctuation">..</span> </code></pre>
+<p>这里注意，不能单独使用-j或者--section，例如<code>objdump --section=.text mytest.o</code>是不会运行成功的。 </p>
 <p> *<em>反汇编mytest.o中的text段内容，并尽可能用源代码形式表示： *</em> </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -j .text -S mytest.o </span>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -j .text -S mytest.o </span>
 mytest.o:     <span class="token function">file</span> <span class="token function">format</span> elf32-i386 
 Disassembly of section .text: 
 00000000 <span class="token operator">&lt;</span>_Z9printTestv<span class="token operator">></span>: 
@@ -271,9 +273,10 @@ void printTest2<span class="token punctuation">(</span><span class="token punctu
   19:   83 45 fc 02             addl   <span class="token variable">&#36;0x2</span>,0xfffffffc<span class="token punctuation">(</span>%ebp<span class="token punctuation">)</span> 
 <span class="token punctuation">}</span> 
   1d:   c9                      leave  
-  1e:   c3                      ret    </code></pre><p>这里注意，不能单独使用-j或者--section，例如<code>objdump -j .text mytest.o是不会运行成功的</code>。另外-S命令对于包含调试信息的目标文件，显示的效果比较好，如果编译时没有指定g++的-g选项，那么目标文件就不包含调试信息，那么显示效果就差多了。 </p>
+  1e:   c3                      ret    </code></pre>
+<p>这里注意，不能单独使用-j或者--section，例如<code>objdump -j .text mytest.o是不会运行成功的</code>。另外-S命令对于包含调试信息的目标文件，显示的效果比较好，如果编译时没有指定g++的-g选项，那么目标文件就不包含调试信息，那么显示效果就差多了。 </p>
 <p> *<em>反汇编出mytest.o的源代码: *</em> </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -S mytest.o </span>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -S mytest.o </span>
 mytest.o:     <span class="token function">file</span> <span class="token function">format</span> elf32-i386 
 
 Disassembly of section .text: 
@@ -303,9 +306,10 @@ void printTest2<span class="token punctuation">(</span><span class="token punctu
   19:   83 45 fc 02             addl   <span class="token variable">&#36;0x2</span>,0xfffffffc<span class="token punctuation">(</span>%ebp<span class="token punctuation">)</span> 
 <span class="token punctuation">}</span> 
   1d:   c9                      leave  
-  1e:   c3                      ret    </code></pre><p>这里，尤其当编译的时候指定了-g这种调试参数时，反汇编的效果比较明显。隐含了-d参数。 </p>
+  1e:   c3                      ret    </code></pre>
+<p>这里，尤其当编译的时候指定了-g这种调试参数时，反汇编的效果比较明显。隐含了-d参数。 </p>
 <p> *<em>显示文件的符号表入口: *</em> </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -t mytest.o </span>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -t mytest.o </span>
 mytest.o:     <span class="token function">file</span> <span class="token function">format</span> elf32-i386 
 
 SYMBOL TABLE: 
@@ -324,12 +328,14 @@ SYMBOL TABLE:
 00000000 l    d  .comment       00000000 .comment 
 00000000 g     F .text  0000000c _Z9printTestv 
 00000000         *UND*  00000000 __gxx_personality_v0 
-0000000c g     F .text  00000013 _Z10printTest2v </code></pre><p>这里，输出的信息类似<code>nm -s</code>命令的输出，相比较之下，nm命令的输出如下： </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># nm -s mytest.o </span>
+0000000c g     F .text  00000013 _Z10printTest2v </code></pre>
+<p>这里，输出的信息类似<code>nm -s</code>命令的输出，相比较之下，nm命令的输出如下： </p>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># nm -s mytest.o </span>
 0000000c T _Z10printTest2v 
 00000000 T _Z9printTestv 
-         U __gxx_personality_v0 </code></pre><p> *<em>显示文件的符号表入口，将底层符号解码并表示成用户级别: *</em> </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -t -C mytest.o </span>
+         U __gxx_personality_v0 </code></pre>
+<p> *<em>显示文件的符号表入口，将底层符号解码并表示成用户级别: *</em> </p>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -t -C mytest.o </span>
 mytest.o:     <span class="token function">file</span> <span class="token function">format</span> elf32-i386 
 SYMBOL TABLE: 
 00000000 l    <span class="token function">df</span> *ABS*  00000000 mytest.cpp 
@@ -347,9 +353,10 @@ SYMBOL TABLE:
 00000000 l    d  .comment       00000000 .comment 
 00000000 g     F .text  0000000c printTest<span class="token punctuation">(</span><span class="token punctuation">)</span> 
 00000000         *UND*  00000000 __gxx_personality_v0 
-0000000c g     F .text  00000013 printTest2<span class="token punctuation">(</span><span class="token punctuation">)</span> </code></pre><p>这里，和没-C相比，printTest2函数可读性增加了。 </p>
+0000000c g     F .text  00000013 printTest2<span class="token punctuation">(</span><span class="token punctuation">)</span> </code></pre>
+<p>这里，和没-C相比，printTest2函数可读性增加了。 </p>
 <p> *<em>反汇编目标文件的特定机器码段： *</em> </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -d mytest.o </span>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -d mytest.o </span>
 mytest.o:     <span class="token function">file</span> <span class="token function">format</span> elf32-i386 
 Disassembly of section .text: 
 
@@ -368,9 +375,10 @@ Disassembly of section .text:
   12:   c7 45 fc 02 00 00 00    movl   <span class="token variable">&#36;0x2</span>,0xfffffffc<span class="token punctuation">(</span>%ebp<span class="token punctuation">)</span> 
   19:   83 45 fc 02             addl   <span class="token variable">&#36;0x2</span>,0xfffffffc<span class="token punctuation">(</span>%ebp<span class="token punctuation">)</span> 
   1d:   c9                      leave  
-  1e:   c3                      ret    </code></pre><p>这里，对text段的内容进行了反汇编。 </p>
+  1e:   c3                      ret    </code></pre>
+<p>这里，对text段的内容进行了反汇编。 </p>
 <p> *<em>反汇编特定段，并将汇编代码对应的文件名称和行号对应上： *</em> </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -d -l mytest.o</span>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -d -l mytest.o</span>
 mytest.o:     <span class="token function">file</span> <span class="token function">format</span> elf32-i386 
 Disassembly of section .text: 
 
@@ -398,9 +406,10 @@ _Z10printTest2v<span class="token punctuation">(</span><span class="token punctu
   19:   83 45 fc 02             addl   <span class="token variable">&#36;0x2</span>,0xfffffffc<span class="token punctuation">(</span>%ebp<span class="token punctuation">)</span> 
 /root/test/04_libraryTest/mytest.cpp:10 
   1d:   c9                      leave  
-  1e:   c3                      ret    </code></pre><p>这里，项&quot;-d&quot;从objfile中反汇编那些特定指令机器码的section，而使用&quot;-l&quot;指定用文件名和行号标注相应的目标代码，仅仅和-d、-D或者-r一起使用，使用-ld和使用-d的区别不是很大，在源码级调试的时候有用，要求编译时使用了-g之类的调试编译选项。 </p>
+  1e:   c3                      ret    </code></pre>
+<p>这里，项&quot;-d&quot;从objfile中反汇编那些特定指令机器码的section，而使用&quot;-l&quot;指定用文件名和行号标注相应的目标代码，仅仅和-d、-D或者-r一起使用，使用-ld和使用-d的区别不是很大，在源码级调试的时候有用，要求编译时使用了-g之类的调试编译选项。 </p>
 <p> *<em>显示目标文件各个段的头部摘要信息： *</em> </p>
-<pre><code><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -h mytest.o </span>
+<pre><code class="language-shell"><span class="token punctuation">[</span>root@localhost test<span class="token punctuation">]</span><span class="token comment"># objdump -h mytest.o </span>
 mytest.o:     <span class="token function">file</span> <span class="token function">format</span> elf32-i386 
 
 Sections: 
@@ -428,7 +437,8 @@ Idx Name          Size      VMA       LMA       File off  Algn
 10 .comment      0000002e  00000000  00000000  000002b3  2**0 
                   CONTENTS, READONLY 
 11 .note.GNU-stack 00000000  00000000  00000000  000002e1  2**0 
-                  CONTENTS, READONLY </code></pre><p>这里，更多的内容参见<code>man objdump</code>中的这个选项。</p>
+                  CONTENTS, READONLY </code></pre>
+<p>这里，更多的内容参见<code>man objdump</code>中的这个选项。</p>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 </div>
 
@@ -451,7 +461,7 @@ Idx Name          Size      VMA       LMA       File off  Algn
 </div>
 <script>
 var _hmt = _hmt || []; (function() {var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?a542c0213a9aa8ae29fccdc8a18b91ef"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })(); </script>
-<script type="text/javascript" src="../js/dt.js?v=1556459563430"></script>
-<script type="text/javascript" src="../js/index.js?v=1556459563430"></script>
+<script type="text/javascript" src="../js/dt.js?v=1556469651079"></script>
+<script type="text/javascript" src="../js/index.js?v=1556469651079"></script>
 </body>
 </html>
