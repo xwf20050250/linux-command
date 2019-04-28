@@ -10,7 +10,7 @@
     <meta name="keywords" content="Linux,Command,命令大全,Linux命令手册,apk,Alpine Linux 下的包管理工具">
     <title>apk 命令，Linux apk 命令详解：Alpine Linux 下的包管理工具 -  Linux 命令搜索引擎</title>
     <link rel="shortcut icon" href="../img/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="../css/index.css?v=1555906963109">
+    <link rel="stylesheet" type="text/css" href="../css/index.css?v=1556459562307">
 </head>
 <body>
 <a href="https://github.com/jaywcjlove/linux-command" target="_blank" class="github-corner"> <svg viewBox="0 0 250 250"><!-- kenny wang <wowohoo@qq.com> https://github.com/jaywcjlove --> <title>logo</title> <desc>Linux Command Logo. https://github.com/jaywcjlove</desc><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg> </a>
@@ -41,105 +41,105 @@
 </span>
 
 <h1 id="apk">apk</h1><p>Alpine Linux 下的包管理工具</p>
-<h2 id="使用实例">使用实例</h2><pre><code class="language-bash">apk install xxx
-apk search xxx # 支持正则
-apk info xxx # 查看包的详细信息
-apk show # list local package
-# 卸载并删除 包
-apk del openssh openntp vim</code></pre>
+<h2 id="使用实例">使用实例</h2><pre><code class="language-shell">apk <span class="token function">install</span> xxx
+apk search xxx <span class="token comment"># 支持正则</span>
+apk info xxx <span class="token comment"># 查看包的详细信息</span>
+apk show <span class="token comment"># list local package</span>
+<span class="token comment"># 卸载并删除 包</span>
+apk del openssh openntp <span class="token function">vim</span></code></pre>
 <h3 id="升级">升级</h3><p>upgrade命令升级系统已安装的所以软件包（一般包括内核），当然也可指定仅升级部分软件包（通过-u或–upgrade选择指定）。</p>
-<pre><code class="language-bash">apk update # 更新最新本地镜像源
-apk upgrade # 升级软件
-apk add <span class="token operator">--</span>upgrade busybox # 指定升级部分软件包</code></pre>
-<h3 id="搜索">搜索</h3><pre><code class="language-bash">apk search # 查找所以可用软件包
-apk search <span class="token operator">-</span>v # 查找所以可用软件包及其描述内容
-apk search <span class="token operator">-</span>v <span class="token string">'acf*'</span> # 通过软件包名称查找软件包
-apk search <span class="token operator">-</span>v <span class="token operator">-</span>d <span class="token string">'docker'</span> # 通过描述文件查找特定的软件包</code></pre>
+<pre><code class="language-shell">apk update <span class="token comment"># 更新最新本地镜像源</span>
+apk upgrade <span class="token comment"># 升级软件</span>
+apk <span class="token function">add</span> --upgrade busybox <span class="token comment"># 指定升级部分软件包</span></code></pre>
+<h3 id="搜索">搜索</h3><pre><code class="language-shell">apk search <span class="token comment"># 查找所以可用软件包</span>
+apk search -v <span class="token comment"># 查找所以可用软件包及其描述内容</span>
+apk search -v <span class="token string">'acf*'</span> <span class="token comment"># 通过软件包名称查找软件包</span>
+apk search -v -d <span class="token string">'docker'</span> <span class="token comment"># 通过描述文件查找特定的软件包</span></code></pre>
 <h3 id="查看包信息">查看包信息</h3><p>info命令用于显示软件包的信息。</p>
-<pre><code class="language-bash">apk info # 列出所有已安装的软件包
-apk info <span class="token operator">-</span>a zlib # 显示完整的软件包信息
-apk info <span class="token operator">--</span>who<span class="token operator">-</span>owns <span class="token operator">/</span>sbin<span class="token operator">/</span>lbu # 显示指定文件属于的包</code></pre>
+<pre><code class="language-shell">apk info <span class="token comment"># 列出所有已安装的软件包</span>
+apk info -a zlib <span class="token comment"># 显示完整的软件包信息</span>
+apk info --who-owns /sbin/lbu <span class="token comment"># 显示指定文件属于的包</span></code></pre>
 <h2 id="笔记">笔记</h2><p>还是蛮喜欢 alpine 的，简单纯粹</p>
-<pre><code class="language-bash">apk add iproute2 # ss vs netstat
-ss <span class="token operator">-</span>ptl
-apk add drill # drill vs nslookup<span class="token operator">&amp;</span>dig
+<pre><code class="language-shell">apk <span class="token function">add</span> iproute2 <span class="token comment"># ss vs netstat</span>
+ss -ptl
+apk <span class="token function">add</span> drill <span class="token comment"># drill vs nslookup&amp;dig</span>
 
-crond # 开启 cron 服务
-crontab <span class="token operator">-</span>l <span class="token operator">-</span>e
+crond <span class="token comment"># 开启 cron 服务</span>
+<span class="token function">crontab</span> -l -e
 
-apk add xxx
-apk search <span class="token operator">-</span>v xxx
-apk info <span class="token operator">-</span>a xxx
+apk <span class="token function">add</span> xxx
+apk search -v xxx
+apk info -a xxx
 apk info
-echo <span class="token operator">-</span>e <span class="token string">"http://mirrors.aliyun.com/alpine/v3.6/main\nhttp://mirrors.aliyun.com/alpine/v3.6/community"</span> <span class="token operator">></span> <span class="token operator">/</span>etc<span class="token operator">/</span>apk<span class="token operator">/</span>repositories
+<span class="token keyword">echo</span> -e <span class="token string">"http://mirrors.aliyun.com/alpine/v3.6/main\nhttp://mirrors.aliyun.com/alpine/v3.6/community"</span> <span class="token operator">></span> /etc/apk/repositories
 apk update
 
-<span class="token macro property"># storage</span>
-ibu # alpine local backup
+<span class="token comment"># storage</span>
+ibu <span class="token comment"># alpine local backup</span>
 
-<span class="token macro property"># network</span>
-echo <span class="token string">"shortname"</span> <span class="token operator">></span> <span class="token operator">/</span>etc<span class="token operator">/</span>hostname
-hostname <span class="token operator">-</span>F <span class="token operator">/</span>etc<span class="token operator">/</span>hostname
-<span class="token operator">/</span>etc<span class="token operator">/</span>hosts
-<span class="token operator">/</span>etc<span class="token operator">/</span>resolv<span class="token punctuation">.</span>conf # conig DNS
-modprobe ipv6 # enable ipv6
-echo <span class="token string">"ipv6"</span> <span class="token operator">>></span> <span class="token operator">/</span>etc<span class="token operator">/</span>modules
-iface # config interface
-apk add iptables ip6tables iptables<span class="token operator">-</span>doc
-<span class="token operator">/</span>etc<span class="token operator">/</span>init<span class="token punctuation">.</span>d<span class="token operator">/</span>networking restart # activate change
-apke add iputils # IPv6 traceroute
-traceroute6 ipv6<span class="token punctuation">.</span>google<span class="token punctuation">.</span>com
-awall # alpine wall
-<span class="token macro property"># setup a openvpn server</span>
+<span class="token comment"># network</span>
+<span class="token keyword">echo</span> <span class="token string">"shortname"</span> <span class="token operator">></span> /etc/hostname
+<span class="token function">hostname</span> -F /etc/hostname
+/etc/hosts
+/etc/resolv.conf <span class="token comment"># conig DNS</span>
+modprobe ipv6 <span class="token comment"># enable ipv6</span>
+<span class="token keyword">echo</span> <span class="token string">"ipv6"</span> <span class="token operator">>></span> /etc/modules
+iface <span class="token comment"># config interface</span>
+apk <span class="token function">add</span> iptables ip6tables iptables-doc
+/etc/init.d/networking restart <span class="token comment"># activate change</span>
+apke <span class="token function">add</span> iputils <span class="token comment"># IPv6 traceroute</span>
+traceroute6 ipv6.google.com
+awall <span class="token comment"># alpine wall</span>
+<span class="token comment"># setup a openvpn server</span>
 
-<span class="token macro property"># post-install</span>
-<span class="token operator">/</span>etc<span class="token operator">/</span>apk<span class="token operator">/</span>repositories
-apk add cherokee <span class="token operator">--</span>update<span class="token operator">-</span>cache <span class="token operator">--</span>repository http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>dl<span class="token operator">-</span><span class="token number">3.</span>alpinelinux<span class="token punctuation">.</span>org<span class="token operator">/</span>alpine<span class="token operator">/</span>edge<span class="token operator">/</span>testing<span class="token operator">/</span> <span class="token operator">--</span>allow<span class="token operator">-</span>untrusted
-apk search <span class="token operator">-</span>v <span class="token operator">--</span>description <span class="token string">'NTP'</span> # show description and search from description
-apk info <span class="token operator">-</span>a zlib
-apk info <span class="token operator">-</span>vv<span class="token operator">|</span>sort
-apk info <span class="token operator">-</span>r <span class="token operator">-</span>R # require <span class="token operator">/</span> depency
-apk version <span class="token operator">-</span>v <span class="token operator">-</span>l <span class="token string">'&lt;'</span> # show available updates
-apk upgrade <span class="token operator">-</span>U <span class="token operator">-</span>a
-apk add <span class="token operator">-</span>u xxx # update xxx
+<span class="token comment"># post-install</span>
+/etc/apk/repositories
+apk <span class="token function">add</span> cherokee --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
+apk search -v --description <span class="token string">'NTP'</span> <span class="token comment"># show description and search from description</span>
+apk info -a zlib
+apk info -vv<span class="token operator">|</span><span class="token function">sort</span>
+apk info -r -R <span class="token comment"># require / depency</span>
+apk version -v -l <span class="token string">'&lt;'</span> <span class="token comment"># show available updates</span>
+apk upgrade -U -a
+apk <span class="token function">add</span> -u xxx <span class="token comment"># update xxx</span>
 
-<span class="token operator">/</span>etc<span class="token operator">/</span>runlevels # runlevel
-apk add openrc # use openrc <span class="token keyword">for</span> init system
-rc<span class="token operator">-</span>update add xxx # set to start on
-rc<span class="token operator">-</span>service xxx start # equal <span class="token operator">-></span> <span class="token operator">/</span>etc<span class="token operator">/</span>init<span class="token punctuation">.</span>d<span class="token operator">/</span>xxx start
-rc<span class="token operator">-</span>status
+/etc/runlevels <span class="token comment"># runlevel</span>
+apk <span class="token function">add</span> openrc <span class="token comment"># use openrc for init system</span>
+rc-update <span class="token function">add</span> xxx <span class="token comment"># set to start on</span>
+rc-service xxx start <span class="token comment"># equal -> /etc/init.d/xxx start</span>
+rc-status
 
 adduser xxx
-passwd xxx
+<span class="token function">passwd</span> xxx
 
-apk add ansible # server
-ssh<span class="token operator">-</span>keygen
-<span class="token operator">/</span>etc<span class="token operator">/</span>ansible<span class="token operator">/</span>hosts
-apk add python # node
-ssh<span class="token operator">-</span>copy<span class="token operator">-</span>id
+apk <span class="token function">add</span> ansible <span class="token comment"># server</span>
+ssh-keygen
+/etc/ansible/hosts
+apk <span class="token function">add</span> python <span class="token comment"># node</span>
+ssh-copy-id
 
-apk add man man<span class="token operator">-</span>pages mdocml<span class="token operator">-</span>apropos less less<span class="token operator">-</span>doc
-export PAGER<span class="token operator">=</span>less
-<span class="token operator">/</span>etc<span class="token operator">/</span>rc<span class="token punctuation">.</span>conf # <span class="token operator">/</span>etc<span class="token operator">/</span>rc<span class="token punctuation">.</span>conf <span class="token operator">-></span> funny character
-apk add bash bash<span class="token operator">-</span>doc bash<span class="token operator">-</span>completion # bash
-apk add util<span class="token operator">-</span>linux pciutils usbutils coreutils binutils findutils grep # grep <span class="token operator">/</span> awk
-apk add build<span class="token operator">-</span>base gcc abuild binutils binutils<span class="token operator">-</span>doc gcc<span class="token operator">-</span>doc # compile
-apk add cmake cmake<span class="token operator">-</span>doc extra<span class="token operator">-</span>cmake<span class="token operator">-</span>modules extra<span class="token operator">-</span>cmake<span class="token operator">-</span>modules<span class="token operator">-</span>doc
-apk add ccache ccache<span class="token operator">-</span>doc
+apk <span class="token function">add</span> <span class="token function">man</span> man-pages mdocml-apropos <span class="token function">less</span> less-doc
+<span class="token function">export</span> PAGER<span class="token operator">=</span>less
+/etc/rc.conf <span class="token comment"># /etc/rc.conf -> funny character</span>
+apk <span class="token function">add</span> <span class="token function">bash</span> bash-doc bash-completion <span class="token comment"># bash</span>
+apk <span class="token function">add</span> util-linux pciutils usbutils coreutils binutils findutils <span class="token function">grep</span> <span class="token comment"># grep / awk</span>
+apk <span class="token function">add</span> build-base gcc abuild binutils binutils-doc gcc-doc <span class="token comment"># compile</span>
+apk <span class="token function">add</span> cmake cmake-doc extra-cmake-modules extra-cmake-modules-doc
+apk <span class="token function">add</span> ccache ccache-doc
 
-apk add docker # docker
-rc<span class="token operator">-</span>update add docker boot
-rc<span class="token operator">-</span>service docker start
-apk add py<span class="token operator">-</span>pip
-pip install docker<span class="token operator">-</span>compose
-ln <span class="token operator">-</span>s <span class="token operator">/</span>usr<span class="token operator">/</span>bin<span class="token operator">/</span>docker<span class="token operator">-</span>compose <span class="token operator">/</span>usr<span class="token operator">/</span>bin<span class="token operator">/</span>doc
+apk <span class="token function">add</span> docker <span class="token comment"># docker</span>
+rc-update <span class="token function">add</span> docker boot
+rc-service docker start
+apk <span class="token function">add</span> py-pip
+pip <span class="token function">install</span> docker-compose
+<span class="token function">ln</span> -s /usr/bin/docker-compose /usr/bin/doc
 
-<span class="token macro property"># application</span>
-apk add openssh # ssh
-rc<span class="token operator">-</span>update add sshd
-<span class="token operator">/</span>etc<span class="token operator">/</span>init<span class="token punctuation">.</span>d<span class="token operator">/</span>sshd start
-<span class="token operator">/</span>etc<span class="token operator">/</span>sshd_config
-apk add dropbear # another openssh implementation</code></pre>
+<span class="token comment"># application</span>
+apk <span class="token function">add</span> openssh <span class="token comment"># ssh</span>
+rc-update <span class="token function">add</span> sshd
+/etc/init.d/sshd start
+/etc/sshd_config
+apk <span class="token function">add</span> dropbear <span class="token comment"># another openssh implementation</span></code></pre>
 
 </div>
 
@@ -162,7 +162,7 @@ apk add dropbear # another openssh implementation</code></pre>
 </div>
 <script>
 var _hmt = _hmt || []; (function() {var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?a542c0213a9aa8ae29fccdc8a18b91ef"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })(); </script>
-<script type="text/javascript" src="../js/dt.js?v=1555906963109"></script>
-<script type="text/javascript" src="../js/index.js?v=1555906963109"></script>
+<script type="text/javascript" src="../js/dt.js?v=1556459562307"></script>
+<script type="text/javascript" src="../js/index.js?v=1556459562307"></script>
 </body>
 </html>
